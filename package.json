@@ -16,7 +16,8 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "electron": "^19.0.4",
-    "screenshot-desktop": "^1.12.7"
+    "screenshot-desktop": "^1.12.7",
+    "uiohook-napi": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
