@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+}
+
+#editor {
+  width: 100vw;
+  height: 100vh;
+}
+
+#selection {
+  position: fixed;
+  width: 40px;
+  height: 64px;
+}
+
+/*
+create shadow around selection box
+*/
+
+#selection::before, #selection::after, .shadow {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.shadow {
+  left: 50%;
+  width: 200vw;
+  height: 200vh;
+}
+
+.shadow:first-of-type {
+  top: 0%;
+  transform: translate(-50%, -100%);
+}
+
+.shadow:last-of-type {
+  bottom: 0%;
+  transform: translate(-50%, 100%);
+}
+
+#selection::before, #selection::after {
+  width: 100vw;
+  height: 100%;
+}
+
+#selection::before {
+  left: 0%;
+  transform: translateX(-100%);
+}
+
+#selection::after {
+  right: 0%;
+  transform: translateX(100%);
+}
