@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node build/src/index.js"
+    "start": "npm run build && electron ./build/index.js"
   },
   "type": "module",
   "dependencies": {
