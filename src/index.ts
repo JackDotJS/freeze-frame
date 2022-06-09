@@ -1,20 +1,23 @@
+import { app, BrowserWindow, Tray, Menu, nativeImage, shell } from 'electron';
 import * as path from 'path';
-import { app, BrowserWindow, Tray, Menu } from 'electron';
 
 // should fix color reproduction
 app.commandLine.appendSwitch(`force-color-profile`, `srgb`);
 
-const trayIcon = path.join(__dirname, `assets/tray.png`)
+const trayIcon = nativeImage.createFromPath(path.join(__dirname, `../assets/tray.png`));
 
 let isClosing = false;
 
-app.on(`ready`, () => {
-  const tray = new Tray(trayIcon);
+app.whenReady().then(() => {
+  const tray = new Tray(trayIcon.resize({ width: 16, height: 16 }));
+
+  tray.setToolTip(`Freeze Frame`)
 
   tray.setContextMenu(Menu.buildFromTemplate([
     {
       icon: trayIcon,
-      label: `Freeze Frame`
+      label: `Freeze Frame`,
+      enabled: false
     },
     {
       type: `separator`
@@ -26,7 +29,7 @@ app.on(`ready`, () => {
     },
     {
       label: `Help`, click: () => {
-        // TODO: open github wiki page
+        shell.openExternal(`https://github.com/JackDotJS/freeze-frame/wiki`)
       }
     },
     {
@@ -36,7 +39,7 @@ app.on(`ready`, () => {
     },
     {
       label: `GitHub`, click: () => {
-        // TODO: open github repo page
+        shell.openExternal(`https://github.com/JackDotJS/freeze-frame`);
       }
     },
     {
