@@ -9,6 +9,20 @@ const trayIcon = nativeImage.createFromPath(path.join(__dirname, `../assets/tray
 let isClosing = false;
 
 app.whenReady().then(() => {
+  const window = new BrowserWindow({
+    show: false,
+    fullscreen: true,
+    frame: false,
+    autoHideMenuBar: true,
+    // webPreferences: {
+    //   preload: path.join(__dirname, `assets/scripts/preload.js`),
+    //   contextIsolation: true,
+    //   nodeIntegration: false // this should be false by default, but better safe than sorry
+    // }
+  });
+
+  window.loadFile(path.join(__dirname, `../views/crop.html`));
+  
   const tray = new Tray(trayIcon.resize({ width: 16, height: 16 }));
 
   tray.setToolTip(`Freeze Frame`)
@@ -18,6 +32,14 @@ app.whenReady().then(() => {
       icon: trayIcon,
       label: `Freeze Frame`,
       enabled: false
+    },
+    {
+      type: `separator`
+    },
+    {
+      label: `Screenshot`, click: () => {
+        window.show();
+      }
     },
     {
       type: `separator`
@@ -47,31 +69,9 @@ app.whenReady().then(() => {
     },
     {
       label: `Quit`,
-      role: `quit`,
-      // click: () => {
-      //   isClosing = true;
-      //   app.quit();
-      // }
+      role: `quit`
     }
   ]));
-
-  // const window = new BrowserWindow({
-  //   show: false,
-  //   fullscreen: true,
-  //   frame: false,
-  //   autoHideMenuBar: true,
-  //   webPreferences: {
-  //     preload: path.join(__dirname, `assets/scripts/preload.js`),
-  //     contextIsolation: true,
-  //     nodeIntegration: false // this should be false by default, but better safe than sorry
-  //   }
-  // });
-
-  // window.loadFile(`views/crop.html`);
-
-  // window.webContents.on(`did-finish-load`, function() {
-  //   window.show();
-  // });
 });
 
 app.on(`before-quit`, () => {
