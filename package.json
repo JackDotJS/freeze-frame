@@ -12,7 +12,6 @@
     "build": "tsc",
     "start": "npm run build && electron ./build/index.js"
   },
-  "type": "module",
   "dependencies": {
     "chalk": "^5.0.1",
     "electron": "^19.0.4",

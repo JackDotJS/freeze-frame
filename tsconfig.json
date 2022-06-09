@@ -3,7 +3,7 @@
     "outDir": "./build",
     "allowJs": true,
     "target": "es2022",
-    "module": "esnext",
+    "module": "commonjs",
     "strict": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
@@ -14,7 +14,13 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    "noImplicitAny": true,
+    "sourceMap": true,
   },
   "include": ["./src/**/*"],
 }
